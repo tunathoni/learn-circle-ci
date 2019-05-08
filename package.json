@@ -16,6 +16,9 @@
     "url": "https://github.com/tunathoni/learn-circle-ci/issues"
   },
   "homepage": "https://github.com/tunathoni/learn-circle-ci#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
   "dependencies": {
     "jest": "^24.8.0"
   }
