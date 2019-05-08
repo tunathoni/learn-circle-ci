@@ -2,43 +2,72 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
-jobs:
-  one: 
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.16.0
-
-    working_directory: ~/repo
-    steps:
+aliases:
+  - &dependencies
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
+      - restore_cache: *restore_gem_cache
+      - run: *npm_install
+      - save_cache: *save_gem_cache
+      
+  - &restore_gem_cache
+      keys:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+  - &npm_install
+      name: Install Dependencies
+      command: npm install
+  - &save_gem_cache
+      paths:
+        - node_modules
+      key: v1-dependencies-{{ checksum "package.json" }}
   
-  two: 
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.16.0
+  - &deploy_stage
+      - checkout
+  
+  - &testing_command
+    - run: npm run test
+  
+  # Requirement groups
+  - &deps
+      - "Dependencies"
+  
+  # Build environments
+    - &deploy_environment
+        working_directory: ~/repo
+        docker:
+            - image: circleci/node:8.16.0
 
-    working_directory: ~/repo
-    steps:
-      - run: npm run test
-
+version: 2
 workflows:
   version: 2
-  build:
-    jobs:
-      - one
-      - two
+  master:
+    jobs: 
+      - "Stage Deploy"
+      - "Dependencies"
+      - "Testing First Command"
+          requires: *deps
+      - "Testing Second Command"
+          requires: *deps
+      - "Testing Third Command"
+          requires: *deps
+jobs:
+  "Stage Deploy":
+    <<: *deploy_environment
+    steps: *deploy_stage
+  
+  "Dependencies":
+    <<: *deploy_environment
+    steps: *dependencies
+  
+  "Testing First Command":
+    <<: *deploy_environment
+    steps: *testing_command
+  
+  "Testing Second Command":
+    <<: *deploy_environment
+    steps: *testing_command
+  
+  "Testing Third Command":
+    <<: *deploy_environment
+    steps: *testing_command
