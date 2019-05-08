@@ -29,7 +29,7 @@ aliases:
       - run: *npm_install
       - run: npm run test
       - store_artifacts:
-          path: /repo/test-artefact.txt
+          path: /test-artefact.txt
           
     # Requirement groups
     - &deps
@@ -44,7 +44,7 @@ aliases:
           - run:
             name: Creating Dummy Artifacts
             command: |
-              mkdir /tmp/artifacts;
+              mkdir /repo;
 
 version: 2
 workflows:
