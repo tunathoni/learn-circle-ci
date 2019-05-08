@@ -39,16 +39,16 @@ aliases:
 
 version: 2
 workflows:
-  version: 2
-  master:
-    jobs:
-        - "Dependencies"
-        - "Testing First Command"
-            requires: *deps
-        - "Testing Second Command"
-            requires: *deps
-        - "Testing Third Command"
-            requires: *deps
+    version: 2
+    master:
+        jobs:
+          - "Dependencies"
+          - "Testing First Command"
+              requires: *deps
+          - "Testing Second Command"
+              requires: *deps
+          - "Testing Third Command"
+              requires: *deps
 jobs:
   "Dependencies":
     <<: *deploy_environment
