@@ -22,9 +22,6 @@ aliases:
         - node_modules
       key: v1-dependencies-{{ checksum "package.json" }}
   
-  - &deploy_stage
-      - checkout
-  
   - &testing_command
     - run: npm run test
   
@@ -43,7 +40,6 @@ workflows:
   version: 2
   master:
     jobs: 
-      - "Stage Deploy"
       - "Dependencies"
       - "Testing First Command"
           requires: *deps
@@ -52,10 +48,6 @@ workflows:
       - "Testing Third Command"
           requires: *deps
 jobs:
-  "Stage Deploy":
-    <<: *deploy_environment
-    steps: *deploy_stage
-  
   "Dependencies":
     <<: *deploy_environment
     steps: *dependencies
