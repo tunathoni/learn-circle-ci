@@ -28,6 +28,8 @@ aliases:
       - checkout
       - run: *npm_install
       - run: npm run test
+      - store_artifacts:
+          path: /repo/test-artefact.txt
 
     # Requirement groups
     - &deps
