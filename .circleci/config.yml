@@ -25,6 +25,7 @@ aliases:
         - save_cache: *save_gem_cache
 
     - &testing_command
+      - checkout
       - run: npm run test
 
     # Requirement groups
@@ -33,9 +34,9 @@ aliases:
 
     # Build environments
     - &deploy_environment
-        working_directory: ~/repo
         docker:
           - image: circleci/node:8.16.0
+        working_directory: ~/repo
 
 version: 2
 workflows:
