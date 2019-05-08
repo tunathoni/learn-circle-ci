@@ -30,7 +30,7 @@ aliases:
       - run: npm run test
       - store_artifacts:
           path: /repo/test-artefact.txt
-
+          
     # Requirement groups
     - &deps
         - "Dependencies"
@@ -40,6 +40,11 @@ aliases:
         docker:
           - image: circleci/node:8.16.0
         working_directory: ~/repo
+        steps:
+          - run:
+            name: Creating Dummy Artifacts
+            command: |
+              mkdir /tmp/artifacts;
 
 version: 2
 workflows:
