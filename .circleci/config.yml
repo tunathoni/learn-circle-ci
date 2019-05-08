@@ -41,7 +41,7 @@ version: 2
 workflows:
   version: 2
   master:
-    jobs: 
+    jobs:
       - "Dependencies"
       - "Testing First Command"
           requires: *deps
