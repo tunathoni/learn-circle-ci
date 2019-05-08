@@ -43,12 +43,13 @@ workflows:
     master:
         jobs:
           - "Dependencies"
-          - "Testing First Command"
+          - "Testing First Command":
               requires: *deps
-          - "Testing Second Command"
+          - "Testing Second Command":
               requires: *deps
-          - "Testing Third Command"
+          - "Testing Third Command":
               requires: *deps
+
 jobs:
   "Dependencies":
     <<: *deploy_environment
