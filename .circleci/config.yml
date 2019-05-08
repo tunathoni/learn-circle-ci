@@ -26,6 +26,7 @@ aliases:
 
     - &testing_command
       - checkout
+      - run: *npm_install
       - run: npm run test
 
     # Requirement groups
