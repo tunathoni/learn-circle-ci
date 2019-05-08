@@ -32,10 +32,10 @@ aliases:
         - "Dependencies"
 
     # Build environments
-      - &deploy_environment
-          working_directory: ~/repo
-          docker:
-              - image: circleci/node:8.16.0
+    - &deploy_environment
+        working_directory: ~/repo
+        docker:
+          - image: circleci/node:8.16.0
 
 version: 2
 workflows:
