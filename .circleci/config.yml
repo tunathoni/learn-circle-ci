@@ -3,24 +3,26 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 aliases:
-  - &dependencies
-      - checkout
-      - restore_cache: *restore_gem_cache
-      - run: *npm_install
-      - save_cache: *save_gem_cache
-      
   - &restore_gem_cache
       keys:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+  
   - &npm_install
       name: Install Dependencies
       command: npm install
+
   - &save_gem_cache
       paths:
         - node_modules
       key: v1-dependencies-{{ checksum "package.json" }}
+  
+  - &dependencies
+      - checkout
+      - restore_cache: *restore_gem_cache
+      - run: *npm_install
+      - save_cache: *save_gem_cache
   
   - &testing_command
     - run: npm run test
