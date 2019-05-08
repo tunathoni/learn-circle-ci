@@ -1,0 +1,22 @@
+{
+  "name": "learn-circle-ci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tunathoni/learn-circle-ci.git"
+  },
+  "author": "tunathoni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tunathoni/learn-circle-ci/issues"
+  },
+  "homepage": "https://github.com/tunathoni/learn-circle-ci#readme",
+  "dependencies": {
+    "jest": "^24.8.0"
+  }
+}
